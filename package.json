@@ -1,0 +1,44 @@
+{
+  "name": "full-stack-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "netlify dev",
+    "serve": "netlify deploy --prod",
+    "devStart": "ts-node backend/index.ts",
+    "server": "nodemon backend/index.ts",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "file path",
+    "prod": "cross-env CI=false npm run build --prefix frontend && tsc -p . && node backend/dist",
+    "update": "npm install --prefix frontend && npm install",
+    "build": "npm run update && npm run prod"
+  },
+  "private": true,
+  "workspaces": [
+    "./frontend"
+  ],
+  "author": "Prince",
+  "license": "MIT",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "colors.ts": "^1.0.20",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.2",
+    "serverless-http": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "netlify-cli": "^3.29.14"
+  }
+}
