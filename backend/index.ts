@@ -1,25 +1,29 @@
 import Colors = require('colors.ts');
 Colors.colors;
 require('dotenv').config();
-import express, { Application, json as JSONBody, Request, Response, urlencoded } from 'express';
+import express, { Application, json as JSONBody, urlencoded } from 'express';
 import serverless from 'serverless-http';
 // import routers = require('./routes/user.routes') // can use this syntax as well, but first see the export syntax.
+import cors, { CorsOptions } from 'cors';
 import connectDB from './config/db';
 import { errorHandler } from './middlewares/errorhandle';
 import { docRoutes, userRoutes } from './routes';
-import cors = require('cors');
 
 const dbURL = process.env.DATABASE_URI ?? "mongodb://localhost:27017/FullStack";
 
 const app: Application = express();
 
+const corsOptions: CorsOptions = {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
+      callback(null, true); // Allow all origins
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true, // Allow cookies and other credentials
+}
+
 connectDB(dbURL);
 
-app.use(cors({
-  origin: 'http://localhost:8888',
-  methods: ['GET', 'POST'],
-  credential: true,
-}));
+app.use(cors(corsOptions));
 app.use(JSONBody());
 app.use(urlencoded({ extended: false }));
 
