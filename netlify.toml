@@ -1,6 +1,6 @@
 # example netlify.toml
 [build]
-  base = "frontend"
+  base = "./"
   publish = "frontend/build"
   command = "npm run build"
 
@@ -11,6 +11,14 @@
   from = "/*"
   to = "/index.html"
   status = 200
+
+[build.environment]
+  NODE_ENV = "production"
+  DATABASE_URI = "mongodb+srv://princedev:a9v5zSviAWYgrmIV@cluster0.avnmsp4.mongodb.net/FullStack"
+
+[context.production.environment]
+  NODE_ENV = "production"
+  DATABASE_URI = "mongodb+srv://princedev:a9v5zSviAWYgrmIV@cluster0.avnmsp4.mongodb.net/FullStack"
 
   ## Uncomment to use this redirect for Single Page Applications like create-react-app.
   ## Not needed for static site generators.

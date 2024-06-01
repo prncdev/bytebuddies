@@ -1,7 +1,6 @@
 node_modules
-.yarn
-dist
 .env
-.yarnrc.yml
+backend/dist
+
 # Local Netlify folder
 .netlify

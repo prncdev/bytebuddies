@@ -8,16 +8,18 @@ import connectDB from './config/db';
 import { errorHandler } from './middlewares/errorhandle';
 import { docRoutes, userRoutes } from './routes';
 import cors = require('cors');
-import path = require('path');
 
-const port = process.env.PORT ?? 5000;
 const dbURL = process.env.DATABASE_URI ?? "mongodb://localhost:27017/FullStack";
 
 const app: Application = express();
 
 connectDB(dbURL);
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:8888',
+  methods: ['GET', 'POST'],
+  credential: true,
+}));
 app.use(JSONBody());
 app.use(urlencoded({ extended: false }));
 
